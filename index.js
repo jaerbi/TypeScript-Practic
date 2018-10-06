@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -96,6 +97,7 @@ var UserClass = /** @class */ (function () {
     function UserClass(name, job) {
         this.name = name;
         this.job = job;
+        this.isTeacher = true; // private
         this.age = 30;
     }
     UserClass.prototype.getAge = function () {
@@ -143,6 +145,7 @@ var jrb = new Jrb('Frontend');
 //ABSTRACT CLASS
 var Car = /** @class */ (function () {
     function Car() {
+        this.model = 'test';
         this.year = 2010;
     }
     Car.prototype.getCarYear = function () {
@@ -161,4 +164,56 @@ var Mercedes = /** @class */ (function (_super) {
     return Mercedes;
 }(Car));
 var car = new Mercedes();
-console.log(car);
+// console.log(car);
+//**********************************************************************************
+function getLength(variable) {
+    console.log('getLength', variable.length);
+}
+// getLength([1,2,3,4,5,6]);
+var box = {
+    name: 'JRB',
+    length: 20
+};
+var UserInter = /** @class */ (function () {
+    function UserInter() {
+        this.name = 'user';
+        this.age = 27;
+    }
+    UserInter.prototype.logInfo = function (info) {
+        console.log(info);
+    };
+    UserInter.prototype.getYear = function () {
+        return this.age;
+    };
+    return UserInter;
+}());
+var userInter = new UserInter();
+// console.log(userInter);
+//**********************************************************************************
+// function getter(data: any) {
+//     return data;
+// }
+// console.log(getter(100).length);
+// console.log(getter('JRB').length);
+function genericGetter(data) {
+    return data;
+}
+// console.log(genericGetter<number>(100).toFixed(2));
+// console.log(genericGetter<string>('JRB').length);
+var getGenericFunction = genericGetter;
+// console.log(getGenericFunction<number>(100).toFixed(2));
+// console.log(getGenericFunction<string>('JRB').length);
+var Multiply = /** @class */ (function () {
+    function Multiply(a, b) {
+        this.a = a;
+        this.b = b;
+    }
+    Multiply.prototype.getResult = function () {
+        return +this.a * +this.b;
+    };
+    return Multiply;
+}());
+var mNum = new Multiply(10, 5);
+console.log('Number', mNum.getResult());
+var mStr = new Multiply('50', '40');
+console.log('String', mStr.getResult());

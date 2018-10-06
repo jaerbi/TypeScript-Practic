@@ -102,7 +102,7 @@ myNumber = null;
 //**********************************************************************************
 //TypeScript CLASS
 class UserClass {
-    private isTeacher: boolean; // private
+    private isTeacher: boolean = true; // private
     protected age: number = 30;
 
     constructor(public name: string, public job: string) {
@@ -157,7 +157,7 @@ const jrb = new Jrb('Frontend');
 //**********************************************************************************
 //ABSTRACT CLASS
 abstract class Car {
-    model: string;
+    model: string = 'test';
     year: number = 2010;
 
     abstract logInfo(info: string): void;
@@ -174,4 +174,83 @@ class Mercedes extends Car {
 }
 
 const car = new Mercedes();
-console.log(car);
+// console.log(car);
+
+//**********************************************************************************
+function getLength(variable: ILength): void {
+    console.log('getLength', variable.length);
+}
+// getLength([1,2,3,4,5,6]);
+
+const box = {
+    name: 'JRB',
+    length: 20
+};
+
+interface ILength {
+    length: number;
+}
+
+// getLength(box);
+// getLength([1,2,3]);
+
+//INTERFACE
+interface IUser {
+    name: string;
+    age?: number;
+
+    logInfo(info: string): void
+}
+
+interface IGetYear {
+    getYear(): number;
+}
+
+class UserInter implements IUser, IGetYear {
+    name: string = 'user';
+    age: number = 27;
+
+    logInfo(info: string): void {
+        console.log(info)
+    }
+
+    getYear(): number {
+        return this.age;
+    }
+}
+
+const userInter = new UserInter();
+// console.log(userInter);
+//**********************************************************************************
+// function getter(data: any) {
+//     return data;
+// }
+// console.log(getter(100).length);
+// console.log(getter('JRB').length);
+
+function genericGetter<T> (data: T): T {
+    return data;
+}
+// console.log(genericGetter<number>(100).toFixed(2));
+// console.log(genericGetter<string>('JRB').length);
+
+let getGenericFunction: <T>(data: T) => T = genericGetter;
+// console.log(getGenericFunction<number>(100).toFixed(2));
+// console.log(getGenericFunction<string>('JRB').length);
+
+class Multiply<T extends number | string> {
+    constructor(private a: T, private b: T) {}
+
+    public getResult(): number{
+        return +this.a * +this.b;
+    }
+}
+
+const mNum = new Multiply<number>(10,5);
+// console.log('Number', mNum.getResult());
+
+const mStr = new Multiply<string>('50','40');
+// console.log('String', mStr.getResult());
+
+//**********************************************************************************
+
